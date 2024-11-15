@@ -6,20 +6,24 @@ import { useState } from "react";
 const MyForm = ({ userName, userEmail }) => {
   const [name, setName] = useState(userName);
   const [email, setEmail] = useState(userEmail);
+  const [bio, setBio] = useState("");
+  const [role, setRole] = useState("");
 
   // manipulando dados do nome
   const handleName = (e) => {
     setName(e.target.value);
   };
 
-  console.log(name, email);
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(name, email, bio, role);
 
     //limpando form
     setName("");
     setEmail("");
+    setBio("");
+    setRole("");
   };
 
   return (
@@ -49,6 +53,29 @@ const MyForm = ({ userName, userEmail }) => {
             // controlled input
             value={email || ""}
           />
+        </label>
+        {/* Textarea */}
+        <label>
+          <span>Bio:</span>
+          <textarea
+            name="bio"
+            placeholder="Descrição do usuário"
+            onChange={(e) => setBio(e.target.value)}
+            value={bio}
+          ></textarea>
+        </label>
+        {/* Select */}
+        <label>
+          <span>Função no sistema</span>
+          <select
+            name="role"
+            onChange={(e) => setRole(e.target.value)}
+            value={role}
+          >
+            <option value="user">Usuário</option>
+            <option value="editor">Editor</option>
+            <option value="admin">Admin</option>
+          </select>
         </label>
 
         <input type="submit" value="enviar" />
