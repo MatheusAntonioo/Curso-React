@@ -19,6 +19,11 @@
       "id": "5b6c",
       "name": "teste",
       "price": "10"
+    },
+    {
+      "id": "d796",
+      "name": "outro",
+      "price": "20"
     }
   ]
 }

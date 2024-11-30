@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 
 const url = "http://localhost:3000/products";
@@ -21,7 +22,7 @@ function App() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const product = {
@@ -30,13 +31,16 @@ function App() {
     };
 
     // requisição
-    const res = fetch(url, {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(product),
     });
+
+    const addedProduct = await res.json();
+    setProducts((prevProducts) => [...prevProducts, addedProduct]);
   };
 
   return (
