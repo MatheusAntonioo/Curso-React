@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
+import { useFetch } from "./hooks/useFetch";
 
 const url = "http://localhost:3000/products";
 
@@ -8,15 +9,19 @@ import "./App.css";
 function App() {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    async function getData() {
-      const res = await fetch(url);
-      const data = await res.json();
-      setProducts(data);
-    }
+  // 4 - custom hook
+  const { data: items } = useFetch(url);
 
-    getData();
-  }, []);
+  // usando custom hook no lugar
+  // useEffect(() => {
+  //   async function getData() {
+  //     const res = await fetch(url);
+  //     const data = await res.json();
+  //     setProducts(data);
+  //   }
+
+  //   getData();
+  // }, []);
 
   // 2 - Envio de dados
   const [name, setName] = useState("");
@@ -41,6 +46,9 @@ function App() {
 
     const addedProduct = await res.json();
     setProducts((prevProducts) => [...prevProducts, addedProduct]);
+
+    name.value = "";
+    price.value = "";
   };
 
   return (
@@ -48,11 +56,12 @@ function App() {
       <h1>HTTP com react</h1>
       {/** 1 - Resgate de dados */}
       <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - R${product.price}
-          </li>
-        ))}
+        {items &&
+          items.map((product) => (
+            <li key={product.id}>
+              {product.name} - R${product.price}
+            </li>
+          ))}
       </ul>
 
       {/* 2 */}

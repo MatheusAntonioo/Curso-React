@@ -24,6 +24,21 @@
       "id": "d796",
       "name": "outro",
       "price": "20"
+    },
+    {
+      "id": "7f73",
+      "name": "violino",
+      "price": "500"
+    },
+    {
+      "id": "e61b",
+      "name": "guitarra",
+      "price": "1000"
+    },
+    {
+      "id": "9fa6",
+      "name": "teste",
+      "price": "1000"
     }
   ]
 }
